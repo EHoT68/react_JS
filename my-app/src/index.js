@@ -1,12 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import { App } from './App';
+import ReactDOM from "react-dom";
+import { ThemeProvider, createTheme } from "@mui/material";
+import React from "react";
+import { BasicList, MessageList } from "./components";
+import "./global.css";
+
+
+
+const dark = createTheme({});
+
+const light = createTheme({
+   theme: {
+      color: "gold",
+      backgroundColor: "#7f8082",
+   },
+});
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App message="тутс тутс быщ" />
-  </React.StrictMode>,
-  document.getElementById('root')
+   <ThemeProvider theme={light}>
+      <BasicList />
+      <MessageList />
+   </ThemeProvider>,
+   document.getElementById("root")
 );
-
