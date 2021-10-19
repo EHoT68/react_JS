@@ -1,24 +1,36 @@
 import ReactDOM from "react-dom";
+import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material";
 import React from "react";
-import { BasicList, MessageList } from "./components";
+import { ChatPage } from "./pages";
+import { HomePage } from "./pages";
+// import { TestRoute } from "./components/test-route";
 import "./global.css";
 
-
-
-const dark = createTheme({});
-
 const light = createTheme({
-   theme: {
-      color: "gold",
-      backgroundColor: "#7f8082",
-   },
+  theme: {
+    color: "red",
+  },
 });
 
 ReactDOM.render(
-   <ThemeProvider theme={light}>
-      <BasicList />
-      <MessageList />
-   </ThemeProvider>,
-   document.getElementById("root")
+  <BrowserRouter>
+    <ThemeProvider theme={light}>
+      <Switch>
+        <Route path="/chat">
+          <ChatPage />
+        </Route>
+
+        <Route path="/">
+          <HomePage />
+        </Route>
+
+        <Route path="*">
+          <h1>404 page</h1>
+          <Link to="/chat">go to Chat</Link>
+        </Route>
+      </Switch>
+    </ThemeProvider>
+  </BrowserRouter>,
+  document.getElementById("root")
 );
