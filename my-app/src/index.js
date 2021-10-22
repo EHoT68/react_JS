@@ -6,6 +6,9 @@ import { ChatPage } from "./pages";
 import { HomePage } from "./pages";
 // import { TestRoute } from "./components/test-route";
 import "./global.css";
+import  App  from "./App";
+import { store } from "./store/create-store";
+import { Provider } from "react-redux";
 
 const light = createTheme({
   theme: {
@@ -20,6 +23,12 @@ ReactDOM.render(
         <Route path="/chat">
           <ChatPage />
         </Route>
+
+         <Route path="/profile">
+            <Provider store={store}>
+               <App/>
+            </Provider>
+         </Route>
 
         <Route path="/">
           <HomePage />
