@@ -1,0 +1,16 @@
+.header {
+  display: flex;
+}
+.headerProf {
+  display: flex;
+  padding: 7px;
+  border: 3px solid rgb(56, 53, 72);
+  border-radius: 15px;
+  background: rgb(15, 24, 75);
+  margin: 8px;
+}
+
+.icon,
+.text {
+  color: #fff;
+}
