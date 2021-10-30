@@ -6,7 +6,7 @@ import {
    handleChangeMessageValue,
    messageValueSelector,
 } from "../../store/conversations";
-import { sendMessage, messagesSelector } from "../../store/messages";
+import { sendMessageWithThunk, messagesSelector } from "../../store/messages";
 import { Message } from "./message";
 import styles from "./message-list.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -35,7 +35,7 @@ export const MessageList = () => {
 
    const handleSendMessage = () => {
       if (value) {
-         dispatch(sendMessage({ author: "User", value }, roomId));
+         dispatch(sendMessageWithThunk({ author: "User", value }, roomId));
       }
    };
 

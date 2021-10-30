@@ -8,7 +8,6 @@ export const ChatList = () => {
    const params = useParams();
    const conversations = useSelector(conversationsSelector);
 
-
    return (
       <List component="nav">
          {conversations.map((chat, index) => (
@@ -19,7 +18,7 @@ export const ChatList = () => {
                   {...chat}
                />
             </Link>
-         ))}
+         ))};
       </List>
    );
 };
