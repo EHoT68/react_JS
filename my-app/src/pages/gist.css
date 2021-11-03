@@ -1,0 +1,15 @@
+.gist-padge {
+  background: #182533;
+  color: #fff;
+  height: 100%;
+  text-align: center;
+  padding-top: 50px;
+}
+.gist-btn {
+  padding: 7px;
+  border: 3px solid rgb(56, 53, 72);
+  border-radius: 15px;
+  background: rgb(15, 24, 75);
+  margin: 8px;
+  color: #fff;
+}

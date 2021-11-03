@@ -1,22 +1,48 @@
-import { createStore, combineReducers } from "redux";
-import { ProfileReducer } from "./reducer";
+import thunk from "redux-thunk";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import { createStore, combineReducers, applyMiddleware, compose } from "redux";
+import { profileReducer } from "./profile";
+import { getGistsApi, searchGistsByUserNameApi } from "../api";
+import { gistsReducer } from "./gists";
+import { conversationsReducer } from "./conversations";
+import { messagesReducer } from "./messages";
+import {
+   logger,
+   botSendMessage,
+   crashReporter,
+   timeScheduler,
+} from "./midelwares";
 
+const persistConfig = {
+   key: "root",
+   storage,
+   blacklist: ["messages"],
+   whitelist: ["profile", "conversations"],
+};
 
-const reducer = (state = { count: 23 }, action) => {
-   switch (action.type) {
-     case "INCREMENT":
-       return { ...state, count: state.count + 1 };
-     case "DECREMENT":
-       return { ...state, count: state.count - 1 };
-     default:
-       return state;
-   }
- };
- 
- export const store = createStore(
+const persistreducer = persistReducer(
+   persistConfig,
    combineReducers({
-     counter: reducer,
-     profile: ProfileReducer
+      profile: profileReducer,
+      conversations: conversationsReducer,
+      gists: gistsReducer,
+      messages: messagesReducer,
    })
- );
- 
+);
+
+export const store = createStore(
+   persistreducer,
+   compose(
+      applyMiddleware(
+         timeScheduler,
+         crashReporter,
+         thunk.withExtraArgument({ getGistsApi, searchGistsByUserNameApi }),
+         logger,
+         botSendMessage
+      ),
+      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+   )
+);
+
+export const persistor = persistStore(store);
