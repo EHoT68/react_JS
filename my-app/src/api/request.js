@@ -1,13 +1,16 @@
 import axios from "axios";
+import { witLigger } from "./logger";
 
 const BASE_URL = "https://api.github.com";
 
 class Request {
   constructor(token) {
     this.token = token;
-    this.request = axios.create({
-      baseURL: BASE_URL,
-    });
+    this.request = witLigger(
+      axios.create({
+        baseURL: BASE_URL,
+      })
+    );
   }
 
   setToken = (token) => {
