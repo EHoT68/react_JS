@@ -1,0 +1,20 @@
+.chat-link {
+  margin-top: 20px;
+  background: #fff;
+  padding: 20px;
+}
+a {
+  text-decoration: none;
+}
+h1 {
+  padding-top: 100px;
+}
+.home-padge {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  height: 93%;
+  color: #fff;
+  background-color: #2b5278;
+}
