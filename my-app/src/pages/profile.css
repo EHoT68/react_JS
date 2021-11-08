@@ -1,0 +1,49 @@
+.profile-box {
+  display: flex;
+  background: #02141a;
+  height: 93%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.App {
+  font-size: 16px;
+  color: #fff;
+  border: 3px solid rgb(56, 53, 72);
+  border-radius: 20px;
+  width: 18em;
+  padding: 10px;
+  background: rgb(15, 24, 75);
+  text-align: center;
+  position: relative;
+}
+
+.icon {
+  color: #fff;
+  padding: 10px;
+  position: absolute;
+  z-index: 5;
+  left: 0px;
+  top: 0px;
+}
+
+.close-prof {
+  position: absolute;
+  z-index: 5;
+  right: 0px;
+  top: 0px;
+}
+.prof-text {
+  padding: 3px;
+}
+
+.but-prof {
+  color: #fff;
+  border: 1px solid rgb(56, 53, 72);
+  border-radius: 20px;
+  background: rgb(15, 24, 75);
+  margin-left: 5px;
+  margin-top: 5px;
+  cursor: pointer;
+}
