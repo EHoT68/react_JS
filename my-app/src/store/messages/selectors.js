@@ -1,7 +1,7 @@
 export const lastMessageSelector = (roomId) => (state) => {
   const messages = state.messages.messages[roomId];
 
-  return messages && messages[messages.length - 1];
+  return messages?.length ? messages[messages.length - 1] : null;
 };
 
 export const messagesSelector = (roomId) => (state) => {

@@ -2,23 +2,10 @@ import { clearMessageValue } from "../conversations";
 import { sendMessage, getMessagesStart, getMessagesSusess, getMessagesError} from "./actions";
 
 export const sendMessageWithThunk =
-  (message, roomId) => async (dispatch, _, { sendMessageApi }) => {
-    
-    try {
-      await sendMessageApi(roomId, message)
+  (message, roomId) => (dispatch, getState) => {
+    dispatch(sendMessage(message, roomId));
 
-      dispatch(sendMessage(message, roomId))
-      dispatch(clearMessageValue(roomId))
-    } catch (e) {
-      console.log("error", e)
-    }
-    // if (message.author === "User") {
-    //   setTimeout(() => {
-    //     dispatch(
-    //       sendMessage({ author: "Bot", value: "Hello from bot" }, roomId)
-    //     );
-    //   }, 500);
-    // }
+    dispatch(clearMessageValue(roomId));
   };
 
 export const getMessagesFB = () => async (dispatch, _, api) => {

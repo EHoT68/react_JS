@@ -6,8 +6,8 @@ import {
   handleChangeMessageValue,
   messageValueSelector,
 } from "../../store/conversations";
-import {  messagesSelector } from "../../store/messages";
-import {  senMessageApi } from "../../api/messages";
+import {  sendMessageWithThunk, messagesSelector } from "../../store/messages";
+//import {  senMessageApi } from "../../api/messages";
 import { Message } from "./message";
 import { sessionSelector } from "../../store/session";
 import styles from "./message-list.module.css";
@@ -38,7 +38,7 @@ export const MessageList = () => {
 
   const handleSendMessage = () => {
     if (value) {
-      dispatch(senMessageApi({ author: session.email, value }, roomId));
+      dispatch(sendMessageWithThunk({ author: session.email, value }, roomId));
     }
   };
 

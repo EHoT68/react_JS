@@ -8,7 +8,6 @@ import { getGistsApi,
    getMessagesApi,
    senMessageApi,
    getConversationsApi,
-   updateConversationValueApi
 } from "../api";
 import { gistsReducer } from "./gists";
 import { conversationsReducer } from "./conversations";
@@ -28,35 +27,36 @@ const persistConfig = {
    whitelist: ["profile", "conversations"],
 };
 
-const persistreducer = persistReducer(
-   persistConfig,
-   combineReducers({
-      profile: profileReducer,
-      conversations: conversationsReducer,
-      gists: gistsReducer,
-      messages: messagesReducer,
-      session: sessionReducer,
-   })
-);
-
-export const store = createStore(
+export const reducer = combineReducers({
+   profile: profileReducer,
+   conversations: conversationsReducer,
+   messages: messagesReducer,
+   gists: gistsReducer,
+   session: sessionReducer,
+ });
+ 
+ const persistreducer = persistReducer(persistConfig, reducer);
+ 
+ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+ 
+ export const store = createStore(
    persistreducer,
-   compose(
-      applyMiddleware(
-         timeScheduler,
-         crashReporter,
-         thunk.withExtraArgument({ getGistsApi,
+   composeEnhancers(
+     applyMiddleware(
+       timeScheduler,
+       crashReporter,
+       thunk.withExtraArgument({
+         getGistsApi,
          searchGistsByUserNameApi,
          getMessagesApi,
          senMessageApi,
          getConversationsApi,
-         updateConversationValueApi
-         }),
-         logger,
-         botSendMessage
-      ),
-      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+       }),
+       logger,
+       botSendMessage
+     )
    )
-);
-
-export const persistor = persistStore(store);
+ );
+ 
+ export const persistor = persistStore(store);
+ 
